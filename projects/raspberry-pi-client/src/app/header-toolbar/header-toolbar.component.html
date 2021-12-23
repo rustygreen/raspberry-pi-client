@@ -1,0 +1,29 @@
+<header class="m-3">
+  <p-menubar [model]="items">
+    <ng-template pTemplate="start">
+      <img src="./assets/pi-logo.svg" height="40" class="pr-3" />
+      <span class="flex-1"></span>
+    </ng-template>
+    <ng-template pTemplate="end">
+      <button
+        pButton
+        pRipple
+        type="button"
+        icon="pi pi-cog"
+        class="p-button-rounded p-button-secondary p-button-text"
+        pTooltip="Settings"
+        (click)="display = true"
+      ></button>
+    </ng-template>
+  </p-menubar>
+</header>
+
+<p-sidebar position="right" [(visible)]="display">
+  <h1>App Settings</h1>
+  TODO: Add settings here
+  <ul>
+    <li>Refresh Settings</li>
+    <li>Theme</li>
+    <li>etc.</li>
+  </ul>
+</p-sidebar>
