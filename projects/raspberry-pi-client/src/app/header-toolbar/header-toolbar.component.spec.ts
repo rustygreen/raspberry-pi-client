@@ -1,6 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
 
 import { HeaderToolbarComponent } from './header-toolbar.component';
+import { HeaderToolbarModule } from './header-toolbar.module';
 
 describe('HeaderToolbarComponent', () => {
   let component: HeaderToolbarComponent;
@@ -8,9 +10,8 @@ describe('HeaderToolbarComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ HeaderToolbarComponent ]
-    })
-    .compileComponents();
+      imports: [RouterTestingModule, HeaderToolbarModule]
+    }).compileComponents();
   });
 
   beforeEach(() => {

@@ -20,7 +20,7 @@ $ git clone https://github.com/rustygreen/raspberry-pi-client
 $ cd raspberry-pi-client
 $ npm install
 $ npm run start # Run in development
-$ npm run build:prd # Build production build
+$ npm run build:prod # Build production build
 ```
 
 ## TODOs

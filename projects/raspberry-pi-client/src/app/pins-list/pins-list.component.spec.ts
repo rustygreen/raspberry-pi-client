@@ -1,6 +1,15 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { of } from 'rxjs';
+import { PiService } from '../core/pi.service';
+import { PinsPageModule } from '../pins-page/pins-page.module';
 
 import { PinsListComponent } from './pins-list.component';
+
+const MOCK_PI_SERVICE = {
+  getPins: () => {
+    return of([]);
+  }
+};
 
 describe('PinsListComponent', () => {
   let component: PinsListComponent;
@@ -8,9 +17,14 @@ describe('PinsListComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ PinsListComponent ]
-    })
-    .compileComponents();
+      imports: [PinsPageModule],
+      providers: [
+        {
+          provide: PiService,
+          useValue: MOCK_PI_SERVICE
+        }
+      ]
+    }).compileComponents();
   });
 
   beforeEach(() => {

@@ -31,6 +31,7 @@
             "inlineStyleLanguage": "scss",
             "assets": [
               "projects/raspberry-pi-client/src/favicon.ico",
+              "projects/raspberry-pi-client/src/_redirects",
               "projects/raspberry-pi-client/src/assets"
             ],
             "styles": ["projects/raspberry-pi-client/src/styles.scss"],
