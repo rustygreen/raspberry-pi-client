@@ -40,3 +40,18 @@ jobs:
         with:
           name: deploy_coverage
           path: coverage
+
+  build-and-push-image:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      # - uses: actions/download-artifact@v3
+      #   with:
+      #     name: deploy_dist
+
+      - name: Display structure of downloaded files
+        run: ls -R
