@@ -32,7 +32,7 @@ jobs:
         uses: actions/upload-artifact@v1
         with:
           name: deploy_dist
-          path: dist
+          path: dist/raspberry-pi-client
 
       - name: Archive code coverage result
         if: success()
@@ -52,6 +52,7 @@ jobs:
       - uses: actions/download-artifact@v3
         with:
           name: deploy_dist
+          path: dist
 
       - name: Display structure of downloaded files
         run: ls -R
