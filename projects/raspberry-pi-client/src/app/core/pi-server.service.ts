@@ -2,19 +2,29 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
-// Local.
-import { GpioPin, GpioPinValue } from '../shared/gpio-pin';
+// 3rd party.
 import { map, Observable, tap } from 'rxjs';
+
+// Local.
+import { AppStateService } from './app-state.service';
+import { GpioPin, GpioPinValue } from '../shared/gpio-pin';
 
 @Injectable({
   providedIn: 'root'
 })
-export class PiService {
-  constructor(private readonly http: HttpClient) {}
+export class PiServerService {
+  get piServerUrl(): string {
+    return this.appState.activePiServer.value?.url || '';
+  }
+
+  constructor(
+    private readonly http: HttpClient,
+    private readonly appState: AppStateService
+  ) {}
 
   getPins(): Observable<GpioPin[]> {
     return this.http
-      .get<GpioPin[]>('http://rasp-1:8080/pins')
+      .get<GpioPin[]>(`${this.piServerUrl}/pins`)
       .pipe(tap(pins => ensureTitle(pins)));
   }
 
@@ -29,7 +39,7 @@ export class PiService {
     value = isPinNumber ? value : (pin as GpioPin).value;
 
     return this.http
-      .get(`http://rasp-1:8080/pins/${pinNumber}/${value}`)
+      .get(`${this.piServerUrl}/${pinNumber}/${value}`)
       .pipe(map(() => {}));
   }
 }

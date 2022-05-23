@@ -1,13 +1,19 @@
+// Angular.
 import {
   Component,
   OnInit,
   ChangeDetectionStrategy,
   ChangeDetectorRef
 } from '@angular/core';
+
+// 3rd party.
 import { MessageService } from 'primeng/api';
-import { finalize } from 'rxjs';
-import { PiService } from '../core/pi.service';
+import { filter, finalize, Subscription } from 'rxjs';
+
+// Local.
 import { GpioPin, GpioPinValue } from '../shared/gpio-pin';
+import { AppStateService } from '../core/app-state.service';
+import { PiServerService } from '../core/pi-server.service';
 
 const SKELETON_COUNT = 13;
 
@@ -33,14 +39,23 @@ export class PinsListComponent implements OnInit {
     { label: 'On', value: 1 }
   ];
 
+  private readonly subscriptions: Subscription[] = [];
+
   constructor(
-    private readonly piService: PiService,
+    private readonly appState: AppStateService,
+    private readonly piService: PiServerService,
     private readonly messageService: MessageService,
     private readonly changeDetector: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
-    this.refresh();
+    this.appState.activePiServer
+      .pipe(filter(Boolean))
+      .subscribe(() => this.refresh());
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.forEach(s => s.unsubscribe());
   }
 
   refresh(): void {
@@ -55,10 +70,7 @@ export class PinsListComponent implements OnInit {
         })
       )
       .subscribe({
-        next: pins => {
-          this.pins = pins;
-          this.changeDetector.markForCheck();
-        },
+        next: pins => (this.pins = pins),
         error: error =>
           this.alert('Query failed', 'Failed to query pins. {error}', error)
       });

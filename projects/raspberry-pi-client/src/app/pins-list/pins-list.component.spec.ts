@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { of } from 'rxjs';
-import { PiService } from '../core/pi.service';
+import { PiServerService } from '../core/pi-server.service';
 import { PinsPageModule } from '../pins-page/pins-page.module';
 
 import { PinsListComponent } from './pins-list.component';
@@ -20,7 +20,7 @@ describe('PinsListComponent', () => {
       imports: [PinsPageModule],
       providers: [
         {
-          provide: PiService,
+          provide: PiServerService,
           useValue: MOCK_PI_SERVICE
         }
       ]

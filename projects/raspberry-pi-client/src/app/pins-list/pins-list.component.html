@@ -24,7 +24,7 @@
 >
   <ng-template pTemplate="header">
     <tr>
-      <th pResizableColumn pSortableColumn="pin">
+      <th pResizableColumn pSortableColumn="pin" class="pin-number">
         # <p-sortIcon field="pin"></p-sortIcon>
       </th>
       <th pResizableColumn pSortableColumn="title">
@@ -38,7 +38,7 @@
   <ng-template pTemplate="body" let-pin>
     <tr *ngIf="!loading; else skeleton">
       <td>{{ pin.pin }}</td>
-      <td>{{ pin.title }}</td>
+      <td class="font-medium">{{ pin.title }}</td>
       <td>
         <i
           *ngIf="pin.loading; else switch"

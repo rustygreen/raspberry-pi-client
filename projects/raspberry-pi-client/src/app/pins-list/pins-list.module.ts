@@ -13,6 +13,7 @@ import { SelectButtonModule } from 'primeng/selectbutton';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 
 import { PinsListComponent } from './pins-list.component';
+import { DynamicDialogModule } from 'primeng/dynamicdialog';
 
 @NgModule({
   declarations: [PinsListComponent],
@@ -24,6 +25,7 @@ import { PinsListComponent } from './pins-list.component';
     ButtonModule,
     TooltipModule,
     SkeletonModule,
+    DynamicDialogModule,
     InputTextModule,
     InputSwitchModule,
     SelectButtonModule,
