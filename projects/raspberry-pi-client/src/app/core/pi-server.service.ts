@@ -39,7 +39,7 @@ export class PiServerService {
     value = isPinNumber ? value : (pin as GpioPin).value;
 
     return this.http
-      .get(`${this.piServerUrl}/${pinNumber}/${value}`)
+      .get(`${this.piServerUrl}/pins/${pinNumber}/${value}`)
       .pipe(map(() => {}));
   }
 }
