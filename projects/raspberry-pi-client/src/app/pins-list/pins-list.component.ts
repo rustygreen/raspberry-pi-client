@@ -12,8 +12,8 @@ import { filter, finalize, Subscription } from 'rxjs';
 
 // Local.
 import { GpioPin, GpioPinValue } from '../shared/gpio-pin';
-import { AppStateService } from '../core/app-state.service';
-import { PiServerService } from '../core/pi-server.service';
+import { AppStateService } from '../core/app-config.service';
+import { PiServerService } from '../core/http-pi-server.service';
 
 const SKELETON_COUNT = 13;
 

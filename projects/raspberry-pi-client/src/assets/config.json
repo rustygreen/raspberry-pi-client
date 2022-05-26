@@ -1,0 +1,15 @@
+{
+  "mockServers": true,
+  "servers": [
+    {
+      "title": "Basement Pi",
+      "url": "https://pi-basement.rusty.green",
+      "pinLabels": {
+        "11": "Cows Water",
+        "17": "Cows Water Drain",
+        "13": "Chickens Water",
+        "31": "Chickens Water Drain"
+      }
+    }
+  ]
+}
