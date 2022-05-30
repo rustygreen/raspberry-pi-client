@@ -12,10 +12,9 @@ import { filter, finalize, Subscription } from 'rxjs';
 
 // Local.
 import { GpioPin, GpioPinValue } from '../shared/gpio-pin';
-import { AppStateService } from '../core/app-config.service';
-import { PiServerService } from '../core/http-pi-server.service';
-
-const SKELETON_COUNT = 13;
+import { AppConfigService } from '../core/app-config.service';
+import { PiServerService } from '../shared/pi-server-service';
+import { DEFAULT_PINS_SKELETON_COUNT } from '../app.constants';
 
 interface ListItem extends GpioPin {
   loading?: boolean;
@@ -30,7 +29,7 @@ interface ListItem extends GpioPin {
 })
 export class PinsListComponent implements OnInit {
   loading = true;
-  pins: ListItem[] = new Array(SKELETON_COUNT);
+  pins: ListItem[];
   search?: string;
 
   readonly pinValues = GpioPinValue;
@@ -39,17 +38,23 @@ export class PinsListComponent implements OnInit {
     { label: 'On', value: 1 }
   ];
 
+  private readonly skeletonCount: number;
   private readonly subscriptions: Subscription[] = [];
 
   constructor(
-    private readonly appState: AppStateService,
+    private readonly appConfig: AppConfigService,
     private readonly piService: PiServerService,
     private readonly messageService: MessageService,
     private readonly changeDetector: ChangeDetectorRef
-  ) {}
+  ) {
+    this.skeletonCount =
+      appConfig.config.value.skeletonCount || DEFAULT_PINS_SKELETON_COUNT;
+
+    this.pins = new Array(this.skeletonCount);
+  }
 
   ngOnInit(): void {
-    this.appState.activePiServer
+    this.appConfig.activeServer
       .pipe(filter(Boolean))
       .subscribe(() => this.refresh());
   }
@@ -60,7 +65,7 @@ export class PinsListComponent implements OnInit {
 
   refresh(): void {
     this.loading = true;
-    this.pins = new Array(SKELETON_COUNT);
+    this.pins = new Array(this.skeletonCount);
     this.piService
       .getPins()
       .pipe(

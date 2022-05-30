@@ -1,5 +1,5 @@
 // Angular.
-import { APP_INITIALIZER, NgModule } from '@angular/core';
+import { APP_INITIALIZER, Injector, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -11,10 +11,11 @@ import { DynamicDialogModule, DialogService } from 'primeng/dynamicdialog';
 import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
 import { AppRoutingModule } from './app-routing.module';
-import { HeaderToolbarModule } from './header-toolbar/header-toolbar.module';
-import { PiServersListModule } from './pi-servers-list/pi-servers-list.module';
+import { PiServerFactory } from './core/pi-server.factory';
 import { AppConfigService } from './core/app-config.service';
 import { PiServerService } from './shared/pi-server-service';
+import { HeaderToolbarModule } from './header-toolbar/header-toolbar.module';
+import { PiServersListModule } from './pi-servers-list/pi-servers-list.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -39,7 +40,7 @@ import { PiServerService } from './shared/pi-server-service';
     {
       provide: PiServerService,
       useFactory: PiServerFactory,
-      deps: [AppConfigService]
+      deps: [AppConfigService, Injector]
     }
   ],
   bootstrap: [AppComponent]

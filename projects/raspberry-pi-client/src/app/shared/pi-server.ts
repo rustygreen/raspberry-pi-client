@@ -5,4 +5,5 @@ export interface PiServer {
   url: string;
   active?: boolean;
   pinLabels?: KeyValuePair;
+  hideUnlabeled?: boolean;
 }

@@ -1,16 +1,17 @@
+// Angular.
 import { Injector } from '@angular/core';
-import { AppConfigService } from './app-config.service';
 
-export async function PiServerFactory(
+// Local.
+import { AppConfigService } from './app-config.service';
+import { PiServerService } from '../shared/pi-server-service';
+import { HttpPiServerService } from './http-pi-server.service';
+import { MockPiServerService } from './mock-pi-server.service';
+
+export function PiServerFactory(
   configService: AppConfigService,
   injector: Injector
-) {
-  //await configService.ready;
-
-  return configService.
-
-  if (configService.authprovider === 'google') {
-    return new GoogleAuthService(configService);
-  }
-  return new FacebookAuthService(oauthService, configService);
+): PiServerService {
+  return configService.config.value.mockServers
+    ? injector.get<MockPiServerService>(MockPiServerService)
+    : injector.get<HttpPiServerService>(HttpPiServerService);
 }

@@ -11,3 +11,11 @@ export class MissingServerError implements AppError {
   message = APP_ERRORS.NO_SERVER;
   readonly code = 1;
 }
+
+export class InvalidGpioPinError implements AppError {
+  constructor(readonly pin: number) {}
+
+  name = 'InvalidGpioPinError';
+  message = APP_ERRORS.INVALID_PIN;
+  readonly code = 1;
+}

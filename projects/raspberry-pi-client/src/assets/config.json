@@ -3,13 +3,26 @@
   "servers": [
     {
       "title": "Basement Pi",
-      "url": "https://pi-basement.rusty.green",
+      "url": "//YOUR-BASEMENT-PI-SERVER",
       "pinLabels": {
-        "11": "Cows Water",
-        "17": "Cows Water Drain",
-        "13": "Chickens Water",
-        "31": "Chickens Water Drain"
+        "7": "Pool heater",
+        "11": "Cows water",
+        "17": "Cows water drain",
+        "13": "Chickens water",
+        "31": "Chickens water drain"
       }
+    },
+    {
+      "title": "Poolside Pi",
+      "url": "//YOUR-POOLSIDE-PI-SERVER",
+      "pinLabels": {
+        "7": "Pool heater",
+        "11": "Hut tub water supply",
+        "12": "Hot tub drain valve",
+        "13": "Patio lights",
+        "15": "PH monitoring station power"
+      },
+      "hideUnlabeled": true
     }
   ]
 }
