@@ -1,6 +1,12 @@
+// Angular.
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { Router } from '@angular/router';
+
+// 3rd party.
 import { MenuItem } from 'primeng/api';
+
+// Local.
+import { AppConfigService } from '../core/app-config.service';
 
 @Component({
   selector: 'app-header-toolbar',
@@ -12,7 +18,12 @@ export class HeaderToolbarComponent implements OnInit {
   items!: MenuItem[];
   display = false;
 
-  constructor(private readonly router: Router) {}
+  constructor(
+    readonly appConfig: AppConfigService,
+    private readonly router: Router
+  ) {
+    this.appConfig.config.value.servers;
+  }
 
   ngOnInit(): void {
     this.items = [

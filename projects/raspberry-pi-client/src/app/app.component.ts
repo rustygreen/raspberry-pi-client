@@ -6,10 +6,7 @@ import { map } from 'rxjs';
 import { DialogService } from 'primeng/dynamicdialog';
 
 // Local.
-import { AppStateService } from './core/app-state.service';
-import { PiServerStorage } from './shared/pi-server-storage';
-import { PiServersListComponent } from './pi-servers-list/pi-servers-list.component';
-import { ConnectPiServerComponent } from './connect-pi-server/connect-pi-server.component';
+import { AppConfigService } from './core/app-config.service';
 
 @Component({
   selector: 'app-root',
@@ -20,21 +17,14 @@ import { ConnectPiServerComponent } from './connect-pi-server/connect-pi-server.
 export class AppComponent implements OnInit {
   constructor(
     private readonly dialogService: DialogService,
-    private readonly servers: PiServerStorage,
-    private readonly appState: AppStateService
+    private readonly appState: AppConfigService
   ) {}
 
   ngOnInit(): void {
-    this.setPiServers();
+    this.validateAppConfiguration();
   }
 
-  setPiServers(): void {
-    this.servers.findAll().pipe(
-      map(servers => {
-        this.appState.piServers.next(servers);
-      })
-    );
-
+  validateAppConfiguration(): void {
     if (!this.appState.hasServices) {
       // TODO: Add this in.
       // const ref = this.dialogService.open(ConnectPiServerComponent, {

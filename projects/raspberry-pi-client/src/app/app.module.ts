@@ -1,5 +1,5 @@
 // Angular.
-import { NgModule } from '@angular/core';
+import { APP_INITIALIZER, Injector, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -11,11 +11,11 @@ import { DynamicDialogModule, DialogService } from 'primeng/dynamicdialog';
 import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
 import { AppRoutingModule } from './app-routing.module';
-import { PiServerStorage } from './shared/pi-server-storage';
+import { PiServerFactory } from './core/pi-server.factory';
+import { AppConfigService } from './core/app-config.service';
+import { PiServerService } from './shared/pi-server-service';
 import { HeaderToolbarModule } from './header-toolbar/header-toolbar.module';
-import { PiServerLocalStorage } from './core/pi-server-localstorage.service';
 import { PiServersListModule } from './pi-servers-list/pi-servers-list.module';
-import { ConnectPiServerModule } from './connect-pi-server/connect-pi-server.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -25,18 +25,23 @@ import { ConnectPiServerModule } from './connect-pi-server/connect-pi-server.mod
     CoreModule,
     RippleModule,
     AppRoutingModule,
-    ConnectPiServerModule,
     DynamicDialogModule,
     PiServersListModule,
     HeaderToolbarModule
   ],
   providers: [
+    DialogService,
     {
-      provide: PiServerStorage,
-      // Switch out with your desired storage mechanism:
-      useClass: PiServerLocalStorage
+      provide: APP_INITIALIZER,
+      useFactory: (service: AppConfigService) => () => service.load(),
+      multi: true,
+      deps: [AppConfigService]
     },
-    DialogService
+    {
+      provide: PiServerService,
+      useFactory: PiServerFactory,
+      deps: [AppConfigService, Injector]
+    }
   ],
   bootstrap: [AppComponent]
 })
