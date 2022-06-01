@@ -33,7 +33,42 @@ services:
     environment:
       # The configuration will consist of one server with URL/title:
       - 'RPC_SERVER=https://pi-basement.rusty.green'
-      - 'RPC_SERVER_TITLE=https://pi-basement.rusty.green'
+      - 'RPC_SERVER_TITLE=Basement Pi'
+```
+
+Then run `docker-compose up`
+
+See the [docker-compose docs](./docs/docker-compose.md) for more examples.
+
+### Kubernetes
+
+deployment.yml
+
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: raspberry-pi-client
+spec:
+  selector:
+    matchLabels:
+      app: raspberry-pi-client
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: raspberry-pi-client
+    spec:
+      containers:
+        - name: raspberry-pi-client
+          image: ghcr.io/rustygreen/raspberry-pi-client:main
+          env:
+            - name: RPC_SERVER
+              value: https://pi-basement.rusty.green
+            - name: RPC_SERVER_TITLE
+              value: Basement Pi
+          ports:
+            - containerPort: 80
 ```
 
 Then run `docker-compose up`

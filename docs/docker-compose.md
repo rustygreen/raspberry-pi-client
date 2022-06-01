@@ -26,5 +26,5 @@ services:
     environment:
       # The configuration will consist of one server with URL/title:
       - 'RPC_SERVER=https://pi-basement.rusty.green'
-      - 'RPC_SERVER_TITLE=https://pi-basement.rusty.green'
+      - 'RPC_SERVER_TITLE=Basement Pi'
 ```
