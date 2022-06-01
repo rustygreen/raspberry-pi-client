@@ -3,7 +3,14 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 // 3rd party.
-import { BehaviorSubject, lastValueFrom, map, Observable } from 'rxjs';
+import {
+  BehaviorSubject,
+  catchError,
+  EMPTY,
+  lastValueFrom,
+  map,
+  Observable
+} from 'rxjs';
 
 // Local.
 import { PiServer } from '../shared/pi-server';
@@ -46,9 +53,10 @@ export class AppConfigService {
   }
 
   load(): Promise<void> {
-    const source = this.http
-      .get<AppConfig>(environment.configUri)
-      .pipe(map(config => this.config.next(config)));
+    const source = this.http.get<AppConfig>(environment.configUri).pipe(
+      map(config => this.config.next(config)),
+      catchError(() => EMPTY)
+    );
 
     return lastValueFrom(source);
   }
