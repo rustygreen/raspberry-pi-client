@@ -14,7 +14,7 @@ The first step is to deploy the [raspberry-pi-server](https://github.com/rustygr
 ### Run with Docker
 
 ```bash
-docker run -d --restart=unless-stopped -p 80:80 ghcr.io/rustygreen/raspberry-pi-client:main -e RPC_SERVER=https://your-pi-server
+docker run -d --restart=unless-stopped -p 80:80 ghcr.io/rustygreen/raspberry-pi-client:main
 ```
 
 To access the application UI, open a browser and go to the hostname or address where the container was installed.
