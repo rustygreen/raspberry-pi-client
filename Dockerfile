@@ -8,5 +8,10 @@ COPY ./scripts/entrypoint.sh /
 RUN chmod +x /entrypoint.sh
 
 EXPOSE 80
+
+ENV RPC_CONFIG=""
+ENV RPC_SERVER=""
+ENV RPC_SERVER_TITLE=""
+
 ENTRYPOINT ["/entrypoint.sh"]
 CMD ["nginx", "-g", "daemon off;"]
