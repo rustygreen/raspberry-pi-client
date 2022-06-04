@@ -6,7 +6,7 @@ Passing full configuration object:
 version: '2'
 services:
   frontend:
-    build: ../Dockerfile
+    image: ghcr.io/rustygreen/raspberry-pi-client:main
     ports:
       - '80:80'
     environment:
@@ -20,7 +20,7 @@ Passing server only:
 version: '2'
 services:
   frontend:
-    build: ../Dockerfile
+    image: ghcr.io/rustygreen/raspberry-pi-client:main
     ports:
       - '80:80'
     environment:

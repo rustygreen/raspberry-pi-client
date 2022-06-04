@@ -1,6 +1,6 @@
 # 🥧 Raspberry Pi Client
 
-`raspberry-pi-client` is a decoupled frontend SPA application designed to communicate with the [raspberry-pi-server project](https://github.com/rustygreen/raspberry-pi-server).
+A simple UI to control Raspberry Pi GPIO pins. The `raspberry-pi-client` is a decoupled frontend SPA application designed to communicate with the [raspberry-pi-server project](https://github.com/rustygreen/raspberry-pi-server).
 
 ## 🏁 Getting Started
 
@@ -27,7 +27,7 @@ docker-compose.yml
 version: '2'
 services:
   frontend:
-    build: ../Dockerfile
+    image: ghcr.io/rustygreen/raspberry-pi-client:main
     ports:
       - '80:80'
     environment:
