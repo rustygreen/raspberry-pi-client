@@ -1,0 +1,100 @@
+{
+  "servers": [
+    {
+      "name": "Testing RPi",
+      "serverUrl": "mock://test.rusty.green"
+    },
+    {
+      "name": "Basement RPi",
+      "serverUrl": "mock://pi-basement.rusty.green",
+      "hideUnlabeled": true,
+      "pinLabels": {
+        "40": "Chickens water",
+        "33": "Cows water",
+        "35": "Main water supply",
+        "37": "Main water drain"
+      }
+    },
+    {
+      "name": "Cowport RPi",
+      "serverUrl": "mock://pi-cowport.rusty.green",
+      "hideUnlabeled": true,
+      "pinLabels": {
+        "16": "Water Sensor Trigger",
+        "18": "Water Sensor Echo",
+        "11": "Open Valve (alone) & Power On",
+        "13": "Close Valve (13 + 15)",
+        "15": "Close Valve (13 + 15)"
+      }
+    }
+  ],
+  "recipes": [
+    {
+      "id": "9b069bbc-19a4-428e-a0c9-eecb172aaace",
+      "type": "fill",
+      "name": "Fill cows water",
+      "description": "Fills the cows water tank to the top and then opens the lines to drain. A max fill time of 15 minutes is supplied to ensure that the valves are never open too long as they can overheat.",
+      "payload": {
+        "serverUrl": "https://pi-basement.rusty.green",
+        "drainTimeMinutes": 2,
+        "maxRunMinutes": 15,
+        "valves": {
+          "supplyPin": 35,
+          "drainPin": 37,
+          "targetPin": 33
+        },
+        "levelSensor": {
+          "serverUrl": "https://pi-cowport.rusty.green",
+          "type": "hcsr04",
+          "triggerPin": 16,
+          "echoPin": 18,
+          "emptyLevel": 25,
+          "fullLevel": 9,
+          "capacityGallons": 50,
+          "retryCount": 2,
+          "retryWait": 3000
+        }
+      }
+    },
+    {
+      "id": "368cc0e7-6672-4110-a91a-ebecc02a1ec9",
+      "type": "drain",
+      "name": "Drain cows water",
+      "description": "Drains the cows water tank completely. Operation is performed by opening a reverse-pole ball-valve and then using a distance sensor to determine the water level.",
+      "payload": {
+        "serverUrl": "https://cowport-basement.rusty.green",
+        "maxRunMinutes": 15,
+        "valves": {
+          "drainPin": 37,
+          "targetPin": 33
+        },
+        "levelSensor": {
+          "serverUrl": "https://pi-cowport.rusty.green",
+          "type": "hcsr04",
+          "triggerPin": 16,
+          "echoPin": 18,
+          "emptyLevel": 25,
+          "fullLevel": 9,
+          "capacityGallons": 50,
+          "retryCount": 2,
+          "retryWait": 3000
+        }
+      }
+    },
+    {
+      "id": "5f255a3e-85a9-486f-831a-046351040444",
+      "type": "safety-check",
+      "name": "Turn off stuck valves",
+      "description": "Turns off any valves that have been on for more than a specified amount of time, since the relay controlled valves will overheat if left on for more than 20 minutes.",
+      "payload": [
+        {
+          "serverUrl": "https://pi-basement.rusty.green",
+          "maxOnTimeMinutes": 17,
+          "normalState": 0,
+          "pins": [33, 35, 37, 40]
+        }
+      ]
+    }
+  ],
+  "pinSkeletonCount": 13
+}
