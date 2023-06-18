@@ -34,8 +34,8 @@ interface ConstructorOptions extends BaseLevelOptions {
 }
 
 const DEFAULT_AVERAGING_OPTIONS: AveragingOptions = {
-  sampleSize: 6,
-  delayMilliseconds: 500
+  sampleSize: 5,
+  delayMilliseconds: 1000
 };
 
 export abstract class LevelSensor {
