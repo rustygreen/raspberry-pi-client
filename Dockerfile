@@ -55,4 +55,8 @@ ENV PORT 3000
 
 VOLUME /app/data
 
+# Allow passing through the RPC_CONFIG JSON configuration environment variable.
+ARG RPC_CONFIG
+ENV RPC_CONFIG="$RPC_CONFIG"
+
 CMD ["node", "server.js"]
