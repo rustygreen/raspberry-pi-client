@@ -14,12 +14,11 @@ function initializeConfig() {
 
   console.log(message);
   if (hasConfig) {
-    saveConfig(config);
+    saveConfig();
   }
 }
 
 function saveConfig() {
-  const configJson = env[configEnvName];
   fs.writeFileSync(configFilePath, configJson);
   console.log(`Config file written to '${configFilePath}'`);
 }
