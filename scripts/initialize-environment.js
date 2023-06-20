@@ -1,10 +1,10 @@
 const fs = require("fs");
 const { env } = require("process");
-const { version } = require("./package.json");
+const { version } = require("../package.json");
 const configEnvName = "RPC_CONFIG";
 const configJson = env[configEnvName];
 const nodeEnv = env["NODE_ENV"];
-const configFilePath = "./data/config.json";
+const configFilePath = "../data/config.json";
 
 function initializeConfig() {
   const hasConfig = Boolean(configJson);
