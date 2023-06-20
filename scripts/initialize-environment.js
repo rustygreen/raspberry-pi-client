@@ -9,8 +9,8 @@ const configFilePath = "../data/config.json";
 function initializeConfig() {
   const hasConfig = Boolean(configJson);
   const message = hasConfig
-    ? `Config env variable '${CONFIG_ENV_VAR_NAME}' exists. File will be written to disk.`
-    : `No value found for config env variable '${CONFIG_ENV_VAR_NAME}'. Skipping writing config file.`;
+    ? `Config env variable '${configEnvName}' exists. File will be written to disk.`
+    : `No value found for config env variable '${configEnvName}'. Skipping writing config file.`;
 
   console.log(message);
   if (hasConfig) {
@@ -19,7 +19,7 @@ function initializeConfig() {
 }
 
 function saveConfig() {
-  const configJson = env[CONFIG_ENV_VAR_NAME];
+  const configJson = env[configEnvName];
   fs.writeFileSync(configFilePath, configJson);
   console.log(`Config file written to '${configFilePath}'`);
 }
