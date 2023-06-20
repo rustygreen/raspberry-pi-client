@@ -29,7 +29,7 @@ function initialize() {
 }
 
 try {
-  initialize();
+  // initialize();
 } catch (error) {
   console.error(`Failed to initialize environment`);
   console.error(error);
