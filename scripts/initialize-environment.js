@@ -28,4 +28,9 @@ function initialize() {
   initializeConfig();
 }
 
-initialize();
+try {
+  initialize();
+} catch (error) {
+  console.error(`Failed to initialize environment`);
+  console.error(error);
+}
