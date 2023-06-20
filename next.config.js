@@ -17,8 +17,8 @@ module.exports = (phase) => {
 
   const mode = isProduction ? "production" : "development";
   const configInfo = hasConfig
-    ? "No config env variable found."
-    : "Config env variable exists.";
+    ? `Config env variable '${CONFIG_ENV_VAR_NAME}' exists.`
+    : `No value found for config env variable '${CONFIG_ENV_VAR_NAME}'. Skipping writing config file.`;
 
   console.log(`Initializing app in '${mode}' mode. ${configInfo}`);
   if (saveConfigFile) {
