@@ -46,6 +46,7 @@ COPY --from=builder /app/public ./public
 # https://nextjs.org/docs/advanced-features/output-file-tracing
 COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
 COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
+COPY --from=builder --chown=nextjs:nodejs /app/scripts ./scripts
 
 USER nextjs
 
@@ -59,4 +60,5 @@ VOLUME /app/data
 ARG RPC_CONFIG
 ENV RPC_CONFIG="$RPC_CONFIG"
 
+ENTRYPOINT ["node", "scripts/initialize-environment.js"]
 CMD ["node", "server.js"]

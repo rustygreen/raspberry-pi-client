@@ -1,5 +1,6 @@
 const fs = require("fs");
 const { env } = require("process");
+const { version } = require("./package.json");
 const { PHASE_PRODUCTION_SERVER } = require("next/constants");
 const CONFIG_ENV_VAR_NAME = "RPC_CONFIG";
 
@@ -20,7 +21,9 @@ module.exports = (phase) => {
     ? `Config env variable '${CONFIG_ENV_VAR_NAME}' exists.`
     : `No value found for config env variable '${CONFIG_ENV_VAR_NAME}'. Skipping writing config file.`;
 
-  console.log(`Initializing app in '${mode}' mode. ${configInfo}`);
+  console.log(
+    `Initializing app version '${version}' in '${mode}' mode. ${configInfo}`
+  );
   if (saveConfigFile) {
     saveConfig(config);
   }

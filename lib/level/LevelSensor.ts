@@ -55,16 +55,19 @@ export abstract class LevelSensor {
 
   async getLevel(): Promise<number> {
     const endpoint = `${this.sensorEndpoint}/${this.options.endpointPath}`;
+    const { retryCount, retryWait } = this.options;
     try {
       const response: LevelSensorResponse = await this.piServer.requestJson({
         endpoint,
-        retryCount: this.options.retryCount,
-        retryWait: this.options.retryWait
+        retryCount,
+        retryWait
       });
 
       return response.distance;
     } catch (error) {
-      this.log.error(`Failed to get level at endpoint: '${endpoint}'`);
+      this.log.error(
+        `Failed to get level at endpoint: '${endpoint}' (retryCount: ${retryCount} retryWait: ${retryWait})`
+      );
       throw error;
     }
   }
