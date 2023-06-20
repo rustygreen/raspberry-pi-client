@@ -60,6 +60,4 @@ VOLUME /app/data
 ARG RPC_CONFIG
 ENV RPC_CONFIG="$RPC_CONFIG"
 
-RUN node './scripts/initialize-environment.js'
-
-CMD ["node", "server.js"]
+CMD ["/bin/sh", "-c", "node ./scripts/initialize-environment.js;node server.js"]
