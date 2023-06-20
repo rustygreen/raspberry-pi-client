@@ -4,7 +4,7 @@ const { version } = require("../package.json");
 const configEnvName = "RPC_CONFIG";
 const configJson = env[configEnvName];
 const nodeEnv = env["NODE_ENV"];
-const configFilePath = "../data/config.json";
+const configFilePath = "./data/config.json";
 
 function initializeConfig() {
   const hasConfig = Boolean(configJson);
@@ -29,7 +29,7 @@ function initialize() {
 }
 
 try {
-  // initialize();
+  initialize();
 } catch (error) {
   console.error(`Failed to initialize environment`);
   console.error(error);

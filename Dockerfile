@@ -60,5 +60,4 @@ VOLUME /app/data
 ARG RPC_CONFIG
 ENV RPC_CONFIG="$RPC_CONFIG"
 
-ENTRYPOINT ["node", "scripts/initialize-environment.js"]
-CMD ["node", "server.js"]
+CMD ["./scripts/startup.sh"]
