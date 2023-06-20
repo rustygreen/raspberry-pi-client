@@ -1,12 +1,8 @@
 {
   "servers": [
     {
-      "name": "Testing RPi",
-      "serverUrl": "mock://test.rusty.green"
-    },
-    {
       "name": "Basement RPi",
-      "serverUrl": "mock://pi-basement.rusty.green",
+      "serverUrl": "https://pi-basement.rusty.green",
       "hideUnlabeled": true,
       "pinLabels": {
         "40": "Chickens water",
@@ -17,7 +13,7 @@
     },
     {
       "name": "Cowport RPi",
-      "serverUrl": "mock://pi-cowport.rusty.green",
+      "serverUrl": "https://pi-cowport.rusty.green",
       "hideUnlabeled": true,
       "pinLabels": {
         "16": "Water Sensor Trigger",
