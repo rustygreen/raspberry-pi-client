@@ -53,6 +53,30 @@
       }
     },
     {
+      "id": "01172978-cafe-47b0-ae38-aeea477dca6b",
+      "type": "fill",
+      "name": "Fill chickens water",
+      "description": "Fills the chickens water tank to the top and then opens the lines to drain. A max fill time of 5 minutes is supplied to ensure that the valves are never open too long as they can overheat.",
+      "payload": {
+        "serverUrl": "https://pi-basement.rusty.green",
+        "drainTimeMinutes": 2,
+        "maxRunMinutes": 5,
+        "valves": {
+          "supplyPin": 35,
+          "drainPin": 37,
+          "targetPin": 40
+        },
+        "levelSensor": {
+          "serverUrl": "https://pi-chickens.rusty.green",
+          "type": "dp5200",
+          "readPin": 40,
+          "fullIndicatorValue": 0,
+          "retryCount": 2,
+          "retryWait": 3000
+        }
+      }
+    },
+    {
       "id": "368cc0e7-6672-4110-a91a-ebecc02a1ec9",
       "type": "drain",
       "name": "Drain cows water",

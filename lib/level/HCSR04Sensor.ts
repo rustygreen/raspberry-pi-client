@@ -1,5 +1,5 @@
 import { LevelSensorType } from "./LevelSensorType";
-import { BaseLevelOptions, LevelSensor } from "./LevelSensor";
+import { BaseLevelOptions, LevelSensorBase } from "./LevelSensorBase";
 
 export interface HCSR04Options extends BaseLevelOptions {
   type: LevelSensorType.Hcsr04;
@@ -7,7 +7,7 @@ export interface HCSR04Options extends BaseLevelOptions {
   triggerPin: number;
 }
 
-export class HCSR04Sensor extends LevelSensor {
+export class HCSR04Sensor extends LevelSensorBase {
   constructor(options: HCSR04Options) {
     const endpointPath = `${options.triggerPin}/${options.echoPin}`;
     super({ ...options, endpointPath });
