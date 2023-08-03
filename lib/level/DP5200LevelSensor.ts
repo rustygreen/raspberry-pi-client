@@ -20,6 +20,10 @@ export class DP5200Sensor implements LevelSensor {
   readonly piServer: PiServer;
   readonly log: Logger;
 
+  get fullLevel(): number {
+    return 1;
+  }
+
   constructor(readonly options: DP5200Options) {
     this.piServer = createPiServer(options);
     this.log = createLogger(`LevelSensor(${options.type})`);
@@ -42,7 +46,7 @@ export class DP5200Sensor implements LevelSensor {
   ): Promise<number> {
     try {
       let level = await this.getLevelAveraged(averagingOptions);
-      while (level < 1) {
+      while (level < this.fullLevel) {
         this.log.debug(`Waiting for level ${level} to equal 1`);
 
         await wait(millisecondsDelay);

@@ -10,6 +10,7 @@ export interface WaitForLevelOptions extends Partial<AveragingOptions> {
 }
 
 export interface LevelSensor {
+  get fullLevel(): number;
   getLevel(): Promise<number>;
   getLevelAveraged(options?: Partial<AveragingOptions>): Promise<number>;
   waitUntilFull(
