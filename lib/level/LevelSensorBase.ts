@@ -43,6 +43,10 @@ export abstract class LevelSensorBase implements LevelSensor {
     this.log = createLogger(`LevelSensor(${options.type})`);
   }
 
+  isFullValue(value: number): boolean {
+    return value <= this.fullLevel;
+  }
+
   async getLevel(): Promise<number> {
     const endpoint = `${this.sensorEndpoint}/${this.options.endpointPath}`;
     const { retryCount, retryWait } = this.options;

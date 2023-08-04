@@ -29,6 +29,10 @@ export class DP5200Sensor implements LevelSensor {
     this.log = createLogger(`LevelSensor(${options.type})`);
   }
 
+  isFullValue(value: number): boolean {
+    return value >= this.fullLevel;
+  }
+
   async getLevel(): Promise<number> {
     const value = await this.piServer.getPin(this.options.readPin);
     return value === this.options.fullIndicatorValue ? 1 : 0;
@@ -46,11 +50,14 @@ export class DP5200Sensor implements LevelSensor {
   ): Promise<number> {
     try {
       let level = await this.getLevelAveraged(averagingOptions);
-      while (level < this.fullLevel) {
-        this.log.debug(`Waiting for level ${level} to equal 1`);
+      let isNotFull = !this.isFullValue(level);
 
+      while (isNotFull) {
+        this.log.debug(`Waiting for level ${level} to equal 1`);
         await wait(millisecondsDelay);
+
         level = await this.getLevelAveraged(averagingOptions);
+        isNotFull = !this.isFullValue(level);
       }
 
       this.log.debug(`Level reached`);

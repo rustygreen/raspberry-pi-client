@@ -40,7 +40,7 @@ export class Filler {
     return [
       this.options.valves.drainPin,
       this.options.valves.supplyPin,
-      this.options.valves.supplyPin
+      this.options.valves.targetPin
     ];
   }
 
@@ -150,7 +150,7 @@ export class Filler {
 
   private async skipIfAlreadyFull(): Promise<boolean> {
     const startLevel = this.status.startLevel as number;
-    const isFull = startLevel <= this.levelSensor.fullLevel;
+    const isFull = this.levelSensor.isFullValue(startLevel);
 
     if (isFull) {
       this.log.info(`Skipping run due to level already full`);
