@@ -41,12 +41,9 @@
         },
         "levelSensor": {
           "serverUrl": "https://pi-cowport.rusty.green",
-          "type": "hcsr04",
-          "triggerPin": 16,
-          "echoPin": 18,
-          "emptyLevel": 25,
-          "fullLevel": 9,
-          "capacityGallons": 50,
+          "type": "dp5200",
+          "readPin": 33,
+          "fullIndicatorValue": 0,
           "retryCount": 2,
           "retryWait": 3000
         }
